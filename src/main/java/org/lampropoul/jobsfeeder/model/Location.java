@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 
 @Data
 @Entity
-public class Location {
+public class Location extends BaseObject {
     private String country;
     private String region;
     private String city;
