@@ -7,7 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 import javax.persistence.Transient;
-import java.util.Date;
+import javax.persistence.Version;
+import java.time.Instant;
 
 @Data
 @Document(collection = "base")
@@ -19,9 +20,13 @@ public class BaseObject {
     @Id
     protected long id;
 
+    @Version
+    private long version;
+
     @CreatedDate
-    protected Date createdAt;
+    private Instant createdDate;
 
     @LastModifiedDate
-    protected Date updatedAt;
+    private Instant lastModifiedDate;
+
 }
