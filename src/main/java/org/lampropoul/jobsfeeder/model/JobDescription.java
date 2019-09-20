@@ -1,11 +1,10 @@
 package org.lampropoul.jobsfeeder.model;
 
 import lombok.Data;
-
-import javax.persistence.Entity;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Entity
+@Document(collection = "job_descriptions")
 public class JobDescription {
     private String description;
 }
