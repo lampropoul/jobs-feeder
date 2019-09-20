@@ -3,25 +3,23 @@ package org.lampropoul.jobsfeeder.model;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 import javax.persistence.Transient;
-import javax.persistence.Version;
 import java.time.Instant;
+import java.util.Objects;
 
 @Data
 @Document(collection = "base")
-public class BaseObject {
+public class BaseObject implements Persistable<Long> {
 
     @Transient
     public static final String SEQUENCE_NAME = "base_sequence";
 
     @Id
-    protected long id;
-
-    @Version
-    private long version;
+    protected Long id;
 
     @CreatedDate
     private Instant createdDate;
@@ -29,4 +27,8 @@ public class BaseObject {
     @LastModifiedDate
     private Instant lastModifiedDate;
 
+    @Override
+    public boolean isNew() {
+        return Objects.isNull(this.createdDate);
+    }
 }
