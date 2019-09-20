@@ -20,17 +20,17 @@ public class CompaniesController {
         this.sequenceGeneratorService = sequenceGeneratorService;
     }
 
-    @GetMapping("/companies/{name}")
+    @GetMapping("/companies/name/{name}")
     public List<Company> getNyName(@PathVariable(value = "name") String name) {
         return companyRepository.findAllByName(name);
     }
 
-    @GetMapping("/company/{id}")
+    @GetMapping("/companies/{id}")
     public Optional<Company> get(@PathVariable(value = "id") Long id) {
         return companyRepository.findById(id);
     }
 
-    @PostMapping("/company/new")
+    @PostMapping("/companies/new")
     public Company create(@RequestBody Company company) {
         company.setId(sequenceGeneratorService.generateSequence(BaseObject.SEQUENCE_NAME));
         return companyRepository.save(company);
