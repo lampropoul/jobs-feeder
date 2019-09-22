@@ -12,7 +12,7 @@ public class ControllersHelper<FeederRepo extends MongoRepository<FeederModel, L
         Response<FeederModel> response = new Response<>();
         Long id = (feederModel.getId() != null) ? feederModel.getId() : 0L;
         if (feederRepo.existsById(id)) {
-            response.setError(ErrorCode.EXISTS);
+            response.setError(ErrorCode.EXISTS.toString());
         } else {
             feederModel.setId(sequenceGeneratorService.generateSequence(BaseObject.SEQUENCE_NAME));
             response.setObject(feederRepo.save(feederModel));
