@@ -34,6 +34,6 @@ public class CompaniesController {
     @PostMapping("/companies/new")
     public Response<Company> create(@RequestBody Company company) {
         // TODO: Create location
-        return new ControllersHelper<CompanyRepository, Company>().generateResponse(companyRepository, company, sequenceGeneratorService);
+        return new ControllersHelper<CompanyRepository, Company>().generateResponseOnCreate(companyRepository, company, sequenceGeneratorService);
     }
 }

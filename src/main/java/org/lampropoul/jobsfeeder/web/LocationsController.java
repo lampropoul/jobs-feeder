@@ -22,6 +22,6 @@ public class LocationsController {
 
     @PostMapping("/locations/new")
     public Response<Location> create(@RequestBody Location location) {
-        return new ControllersHelper<LocationRepository, Location>().generateResponse(locationRepository, location, sequenceGeneratorService);
+        return new ControllersHelper<LocationRepository, Location>().generateResponseOnCreate(locationRepository, location, sequenceGeneratorService);
     }
 }
