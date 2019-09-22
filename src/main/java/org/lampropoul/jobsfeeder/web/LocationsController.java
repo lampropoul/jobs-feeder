@@ -1,6 +1,7 @@
 package org.lampropoul.jobsfeeder.web;
 
-import org.lampropoul.jobsfeeder.model.BaseObject;
+import org.lampropoul.jobsfeeder.helpers.ControllersHelper;
+import org.lampropoul.jobsfeeder.helpers.Response;
 import org.lampropoul.jobsfeeder.model.Location;
 import org.lampropoul.jobsfeeder.repositories.LocationRepository;
 import org.lampropoul.jobsfeeder.services.SequenceGeneratorService;
@@ -20,8 +21,7 @@ public class LocationsController {
     }
 
     @PostMapping("/locations/new")
-    public Location create(@RequestBody Location location) {
-        location.setId(sequenceGeneratorService.generateSequence(BaseObject.SEQUENCE_NAME));
-        return locationRepository.save(location);
+    public Response<Location> create(@RequestBody Location location) {
+        return new ControllersHelper<LocationRepository, Location>().generateResponse(locationRepository, location, sequenceGeneratorService);
     }
 }
