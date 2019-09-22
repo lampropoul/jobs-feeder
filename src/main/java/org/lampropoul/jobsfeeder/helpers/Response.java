@@ -8,5 +8,5 @@ import org.lampropoul.jobsfeeder.errors.ErrorCode;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response<T> {
     private T object;
-    private ErrorCode errorCode;
+    private ErrorCode error;
 }
