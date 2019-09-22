@@ -15,5 +15,5 @@ public class Company extends BaseObject {
     @JsonProperty("locations")
     private List<Location> locationList;
     private String description;
-    private short numOfJobs;
+    private Short numOfJobs;
 }

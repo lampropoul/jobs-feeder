@@ -9,7 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.time.Instant;
-import java.util.Objects;
 
 @Data
 @Document(collection = "base")
@@ -29,6 +28,6 @@ public class BaseObject implements Persistable<Long> {
 
     @Override
     public boolean isNew() {
-        return Objects.isNull(this.createdDate);
+        return (this.createdDate == null);
     }
 }

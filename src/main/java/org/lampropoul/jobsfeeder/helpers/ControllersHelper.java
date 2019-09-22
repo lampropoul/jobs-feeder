@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public class ControllersHelper<FeederRepo extends MongoRepository<FeederModel, Long>, FeederModel extends BaseObject> {
 
-    public Response<FeederModel> generateResponseOnCreate(@NotNull FeederRepo feederRepo, @NotNull FeederModel feederModel, SequenceGeneratorService sequenceGeneratorService) {
+    public Response<FeederModel> saveAndGenerateResponse(@NotNull FeederRepo feederRepo, @NotNull FeederModel feederModel, SequenceGeneratorService sequenceGeneratorService) {
         Response<FeederModel> response = new Response<>();
         Long id = (feederModel.getId() != null) ? feederModel.getId() : 0L;
         if (feederRepo.existsById(id)) {
