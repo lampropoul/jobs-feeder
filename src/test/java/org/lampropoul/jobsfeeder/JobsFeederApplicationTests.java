@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class JobsFeederApplicationTests {
 
-    private TestRestTemplate restTemplate = new TestRestTemplate();
+    private TestRestTemplate testRestTemplate = new TestRestTemplate();
     private HttpHeaders headers = new HttpHeaders();
     @LocalServerPort
     private int port;
@@ -26,7 +26,7 @@ public class JobsFeederApplicationTests {
         Job job = new Job();
         job.setTitle("Backend Engineer");
         HttpEntity<Job> entity = new HttpEntity<>(job, headers);
-        ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/jobs/new"), HttpMethod.POST, entity, String.class);
+        ResponseEntity<String> response = testRestTemplate.exchange(createURLWithPort("/jobs/new"), HttpMethod.POST, entity, String.class);
         assert response != null;
     }
 
