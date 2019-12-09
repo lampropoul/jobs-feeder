@@ -1,10 +1,11 @@
 package org.lampropoul.jobsfeeder.helpers;
 
 import org.jetbrains.annotations.NotNull;
-import org.lampropoul.jobsfeeder.errors.ErrorCode;
 import org.lampropoul.jobsfeeder.model.BaseObject;
 import org.lampropoul.jobsfeeder.services.SequenceGeneratorService;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,15 +17,13 @@ public class FeederHelper<FeederRepo extends MongoRepository<FeederModel, Long>,
         this.sequenceGeneratorService = sequenceGeneratorService;
     }
 
-    public Response<FeederModel> saveAndGenerateResponse(@NotNull FeederRepo feederRepo, @NotNull FeederModel feederModel) {
-        Response<FeederModel> response = new Response<>();
+    public ResponseEntity<FeederModel> saveAndGenerateResponse(@NotNull FeederRepo feederRepo, @NotNull FeederModel feederModel) {
         Long id = (feederModel.getId() != null) ? feederModel.getId() : 0L;
-        if (feederRepo.existsById(id)) {
-            response.setError(ErrorCode.EXISTS.toString());
-        } else {
+        HttpStatus status = HttpStatus.CREATED;
+        if (!feederRepo.existsById(id)) {
             feederModel.setId(sequenceGeneratorService.generateSequence(BaseObject.SEQUENCE_NAME));
-            response.setObject(feederRepo.save(feederModel));
+            status = HttpStatus.OK;
         }
-        return response;
+        return new ResponseEntity<>(feederRepo.save(feederModel), status);
     }
 }

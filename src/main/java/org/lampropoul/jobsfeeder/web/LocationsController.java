@@ -1,9 +1,9 @@
 package org.lampropoul.jobsfeeder.web;
 
 import org.lampropoul.jobsfeeder.helpers.FeederHelper;
-import org.lampropoul.jobsfeeder.helpers.Response;
 import org.lampropoul.jobsfeeder.model.Location;
 import org.lampropoul.jobsfeeder.repositories.LocationRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +20,7 @@ public class LocationsController {
     }
 
     @PostMapping("/locations/new")
-    public Response<Location> create(@RequestBody Location location) {
+    public ResponseEntity<Location> create(@RequestBody Location location) {
         return feederHelper.saveAndGenerateResponse(locationRepository, location);
     }
 }
