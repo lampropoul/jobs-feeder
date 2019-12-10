@@ -27,15 +27,15 @@ public class JobsController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Response<?>> delete(@RequestBody Job job) {
+    public ResponseEntity<Response<Job>> delete(@RequestBody Job job) {
         Response<Job> response = new Response<>();
         try {
             jobRepository.delete(job);
             response.setObject(job);
         } catch (Exception e) {
             response.setError(ErrorCode.NOT_EXISTS.toString());
-            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

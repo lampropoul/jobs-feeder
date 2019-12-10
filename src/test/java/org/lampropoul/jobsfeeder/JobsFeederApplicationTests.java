@@ -1,7 +1,6 @@
 package org.lampropoul.jobsfeeder;
 
 import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.lampropoul.jobsfeeder.model.Company;
@@ -11,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.*;
+
+import java.util.Objects;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -32,16 +33,18 @@ public class JobsFeederApplicationTests {
         job.setLocation(new Location());
     }
 
-    private String createURLWithPort(String path) {
-        return "http://localhost:" + port + path;
+    private String createURLWithPort(String servicePath) {
+        return "http://localhost:" + port + servicePath;
     }
 
     @Test
-    @Order(1)
-    public void createJob() {
+    public void createAndDeleteJob() {
         HttpEntity<Job> entity = new HttpEntity<>(job, headers);
         ResponseEntity<Job> response = restTemplate.exchange(createURLWithPort("/jobs"), HttpMethod.POST, entity, Job.class);
+        job.setId(Objects.requireNonNull(response.getBody()).getId());
         assert response.getStatusCode() == HttpStatus.CREATED || response.getStatusCode() == HttpStatus.OK;
+        response = restTemplate.exchange(createURLWithPort("/jobs"), HttpMethod.DELETE, entity, Job.class);
+        assert response.getStatusCode() == HttpStatus.OK;
     }
 
 }
