@@ -19,10 +19,10 @@ public class FeederHelper<FeederRepo extends MongoRepository<FeederModel, Long>,
 
     public ResponseEntity<FeederModel> saveAndGenerateResponse(@NotNull FeederRepo feederRepo, @NotNull FeederModel feederModel) {
         Long id = (feederModel.getId() != null) ? feederModel.getId() : 0L;
-        HttpStatus status = HttpStatus.CREATED;
+        HttpStatus status = HttpStatus.OK;
         if (!feederRepo.existsById(id)) {
             feederModel.setId(sequenceGeneratorService.generateSequence(BaseObject.SEQUENCE_NAME));
-            status = HttpStatus.OK;
+            status = HttpStatus.CREATED;
         }
         return new ResponseEntity<>(feederRepo.save(feederModel), status);
     }

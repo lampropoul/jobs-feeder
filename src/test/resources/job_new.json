@@ -1,0 +1,33 @@
+{
+  "title": "Backend Engineer",
+  "company": {
+    "name": "Accepted Ltd"
+  },
+  "location": {
+    "city": "Athens"
+  },
+  "jobDescriptions": [
+    {
+      "description": "Job Description #1"
+    },
+    {
+      "description": "Job Description #2"
+    }
+  ],
+  "requirements": [
+    {
+      "description": "Requirement #1"
+    },
+    {
+      "description": "Requirement #2"
+    },
+    {
+      "description": "Requirement #3"
+    }
+  ],
+  "benefits": [
+    {
+      "description": "Benefit #1"
+    }
+  ]
+}
