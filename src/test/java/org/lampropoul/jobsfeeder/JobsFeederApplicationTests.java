@@ -30,7 +30,6 @@ public class JobsFeederApplicationTests {
     private final ObjectMapper objectMapper;
     private TestRestTemplate restTemplate;
     private HttpHeaders headers;
-//    private Job job;
 
     @LocalServerPort
     private int port;
@@ -40,10 +39,6 @@ public class JobsFeederApplicationTests {
         restTemplate = new TestRestTemplate();
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-//        job = new Job();
-//        job.setTitle("Backend Engineer");
-//        job.setCompany(new Company());
-//        job.setLocation(new Location());
     }
 
     private HttpEntity<Job> getRequestEntity(String resourceFilename) throws IOException {
