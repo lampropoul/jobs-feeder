@@ -1,2 +1,2 @@
 # Jobs Feeder
-Jobs feeder from workable
+Aggregates job descriptions from various recruting web apps.
